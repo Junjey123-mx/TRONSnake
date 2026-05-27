@@ -1,15 +1,29 @@
-// TODO: Implement collision detection logic
-export function checkWallCollision(_head, _boardSize) {
-  // TODO: return isOutOfBounds(head, boardSize);
-  return false;
+import { arePositionsEqual } from '../utils/positionUtils'
+
+/**
+ * Returns true if position is outside the board boundaries.
+ * Valid range: 0 to boardSize - 1 on both axes.
+ */
+export function checkWallCollision(position, boardSize) {
+  return (
+    position.x < 0 ||
+    position.x >= boardSize ||
+    position.y < 0 ||
+    position.y >= boardSize
+  )
 }
 
-export function checkSelfCollision(_head, _body) {
-  // TODO: return body.some(segment => arePositionsEqual(head, segment));
-  return false;
+/**
+ * Returns true if head overlaps any segment in snakeBody.
+ * snakeBody should NOT include the head itself.
+ */
+export function checkSelfCollision(head, snakeBody) {
+  return snakeBody.some((segment) => arePositionsEqual(head, segment))
 }
 
-export function checkFoodCollision(_head, _food) {
-  // TODO: return arePositionsEqual(head, food);
-  return false;
+/**
+ * Returns true if head and food share the same position.
+ */
+export function checkFoodCollision(head, food) {
+  return arePositionsEqual(head, food)
 }
