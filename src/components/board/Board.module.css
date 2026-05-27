@@ -8,6 +8,7 @@
   box-shadow: var(--glow-cyan), inset 0 0 40px rgba(0, 234, 255, 0.04);
   background-color: var(--color-bg-soft);
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .cell {

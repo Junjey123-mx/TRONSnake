@@ -1,174 +1,211 @@
-.gameWrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
+/* ── Page / Frame ────────────────────────────── */
+.page {
+  min-height: 100vh;
   background-color: var(--color-bg);
-  color: var(--text-primary);
-  font-family: 'Courier New', Courier, monospace;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Animated grid background */
-.gameWrapper::before {
-  content: '';
-  position: fixed;
-  inset: 0;
   background-image:
     linear-gradient(rgba(0, 234, 255, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 234, 255, 0.025) 1px, transparent 1px);
   background-size: 40px 40px;
-  animation: gridMove 10s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Header ─────────────────────────────────── */
-.header {
-  position: relative;
-  z-index: 1;
+  animation: gridMove 14s linear infinite;
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 0.8rem 2rem 0.6rem;
+}
+
+.frame {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+/* ── Header ──────────────────────────────────── */
+.header {
+  text-align: center;
+  padding: 0.9rem 0 0.65rem;
   border-bottom: 1px solid rgba(0, 234, 255, 0.18);
   flex-shrink: 0;
 }
 
+.headerEyebrow {
+  font-size: 0.55rem;
+  letter-spacing: 0.5em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 0.12rem;
+}
+
 .title {
-  font-size: 1.9rem;
+  font-size: 2rem;
   letter-spacing: 0.55em;
   color: var(--color-cyan);
   text-shadow: var(--glow-cyan);
   text-transform: uppercase;
   font-weight: bold;
-  animation: softFlicker 9s ease-in-out infinite;
   margin: 0;
+  animation: softFlicker 8s ease-in-out infinite;
 }
 
-.titleSub {
-  font-size: 0.6rem;
+.subtitle {
+  font-size: 0.58rem;
   letter-spacing: 0.35em;
   color: var(--text-muted);
   text-transform: uppercase;
-  margin-top: 0.15rem;
-  opacity: 0.65;
+  margin: 0.12rem 0 0;
+  opacity: 0.58;
 }
 
-/* ── Main layout ─────────────────────────────── */
-.mainArea {
-  position: relative;
-  z-index: 1;
+/* ── Arena layout: 3 columns ─────────────────── */
+.arenaLayout {
+  display: grid;
+  grid-template-columns: 260px 1fr 260px;
+  gap: 1rem;
+  padding: 1rem 0;
   flex: 1;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1.4rem;
-  padding: 1.2rem 1.5rem;
-  overflow: hidden;
+  align-items: start;
 }
 
-/* ── Side panels ─────────────────────────────── */
-.sidePanel {
+/* ── Left panel ──────────────────────────────── */
+.leftPanel {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  width: 175px;
-  flex-shrink: 0;
+  gap: 0.75rem;
 }
 
-/* ── Board wrapper ───────────────────────────── */
-.boardWrapper {
-  flex-shrink: 0;
+/* ── Center stage ────────────────────────────── */
+.centerStage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Board wrapper — containing block for overlays */
+.boardFrame {
   position: relative;
 }
 
-/* ── Controls list (left panel) ──────────────── */
-.controlsList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.arenaLabel {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  color: rgba(0, 234, 255, 0.22);
+  text-transform: uppercase;
+  margin: 0;
 }
 
-.controlItem {
+/* ── Right panel ─────────────────────────────── */
+.rightPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ── Panel inner rows ────────────────────────── */
+.dataRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0.28rem 0;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.07);
+}
+
+.dataRow:last-child {
+  border-bottom: none;
+}
+
+.dataLabel {
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.dataValue {
+  font-size: 0.78rem;
+  font-weight: bold;
+  color: var(--color-cyan);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Controls panel ──────────────────────────── */
+.controlRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.28rem 0;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.07);
+}
+
+.controlRow:last-child {
+  border-bottom: none;
 }
 
 .controlKey {
-  color: var(--color-cyan);
   font-size: 0.68rem;
   font-weight: bold;
-  letter-spacing: 0.06em;
+  color: var(--color-cyan);
+  letter-spacing: 0.05em;
 }
 
-.controlDesc {
+.controlAction {
+  font-size: 0.62rem;
   color: var(--text-muted);
-  font-size: 0.68rem;
-}
-
-/* ── Stats list (right panel) ────────────────── */
-.statsList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.statItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.statLabel {
-  color: var(--text-muted);
-  font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.statValue {
-  color: var(--color-cyan);
-  font-size: 0.85rem;
-  font-weight: bold;
-  letter-spacing: 0.06em;
-}
-
-.statValueActive {
-  color: var(--color-green);
+/* ── Status text variants ────────────────────── */
+.statusText {
   font-size: 0.72rem;
   font-weight: bold;
-  letter-spacing: 0.06em;
-  text-shadow: 0 0 6px var(--color-green);
-  animation: pulseGlow 2.5s ease-in-out infinite;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* ── System feed bar ─────────────────────────── */
+.statusStart    { color: var(--text-muted); }
+.statusRunning  { color: var(--color-green); text-shadow: 0 0 8px var(--color-green); }
+.statusPaused   { color: var(--color-orange); text-shadow: 0 0 8px var(--color-orange); }
+.statusGameOver { color: var(--color-red); text-shadow: var(--glow-red); }
+
+/* ── System feed ─────────────────────────────── */
 .systemFeed {
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.38rem 1.5rem;
+  gap: 0.9rem;
+  padding: 0.4rem 0;
   border-top: 1px solid rgba(0, 234, 255, 0.12);
-  background: rgba(0, 234, 255, 0.025);
   flex-shrink: 0;
   overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .feedItem {
   color: var(--text-muted);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  white-space: nowrap;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .feedSep {
-  color: rgba(0, 234, 255, 0.25);
-  font-size: 0.62rem;
+  color: rgba(0, 234, 255, 0.22);
+  font-size: 0.6rem;
   flex-shrink: 0;
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 900px) {
+  .arenaLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .leftPanel   { order: 2; }
+  .centerStage { order: 1; }
+  .rightPanel  { order: 3; }
 }
