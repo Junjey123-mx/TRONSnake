@@ -1,0 +1,174 @@
+.gameWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--text-primary);
+  font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Animated grid background */
+.gameWrapper::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 234, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 234, 255, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header ─────────────────────────────────── */
+.header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.8rem 2rem 0.6rem;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.18);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1.9rem;
+  letter-spacing: 0.55em;
+  color: var(--color-cyan);
+  text-shadow: var(--glow-cyan);
+  text-transform: uppercase;
+  font-weight: bold;
+  animation: softFlicker 9s ease-in-out infinite;
+  margin: 0;
+}
+
+.titleSub {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+  opacity: 0.65;
+}
+
+/* ── Main layout ─────────────────────────────── */
+.mainArea {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 1.2rem 1.5rem;
+  overflow: hidden;
+}
+
+/* ── Side panels ─────────────────────────────── */
+.sidePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  width: 175px;
+  flex-shrink: 0;
+}
+
+/* ── Board wrapper ───────────────────────────── */
+.boardWrapper {
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* ── Controls list (left panel) ──────────────── */
+.controlsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.controlItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controlKey {
+  color: var(--color-cyan);
+  font-size: 0.68rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+}
+
+.controlDesc {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+}
+
+/* ── Stats list (right panel) ────────────────── */
+.statsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.statItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statLabel {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.statValue {
+  color: var(--color-cyan);
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+}
+
+.statValueActive {
+  color: var(--color-green);
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 6px var(--color-green);
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* ── System feed bar ─────────────────────────── */
+.systemFeed {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.38rem 1.5rem;
+  border-top: 1px solid rgba(0, 234, 255, 0.12);
+  background: rgba(0, 234, 255, 0.025);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.feedItem {
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.feedSep {
+  color: rgba(0, 234, 255, 0.25);
+  font-size: 0.62rem;
+  flex-shrink: 0;
+}

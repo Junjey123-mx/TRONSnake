@@ -1,0 +1,33 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(var(--board-size, 20), 1fr);
+  grid-template-rows: repeat(var(--board-size, 20), 1fr);
+  width: 480px;
+  height: 480px;
+  border: 1px solid var(--color-cyan);
+  box-shadow: var(--glow-cyan), inset 0 0 40px rgba(0, 234, 255, 0.04);
+  background-color: var(--color-bg-soft);
+  flex-shrink: 0;
+}
+
+.cell {
+  border: 1px solid rgba(0, 234, 255, 0.06);
+}
+
+.snake {
+  background: var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.head {
+  background: #ffffff;
+  box-shadow: var(--glow-cyan), 0 0 8px #ffffff;
+}
+
+.food {
+  background: var(--color-magenta);
+  box-shadow: var(--glow-magenta);
+  border-radius: 50%;
+  margin: 3px;
+  animation: pulseGlow 1s ease-in-out infinite;
+}

@@ -1,0 +1,52 @@
+/* ── HudPanel ─────────────────────────────────── */
+.panel {
+  border: 1px solid rgba(0, 234, 255, 0.3);
+  background: var(--color-panel);
+}
+
+.panelHeader {
+  padding: 0.35rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.2);
+  background: rgba(0, 234, 255, 0.06);
+}
+
+.panelTitle {
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  color: var(--color-cyan);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.panelBody {
+  padding: 0.8rem 0.75rem;
+}
+
+/* ── Score ────────────────────────────────────── */
+.scoreBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.scoreRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.scoreLabel {
+  color: var(--text-muted);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.scoreValue {
+  color: var(--color-cyan);
+  font-size: 1.15rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-shadow: var(--glow-cyan);
+  font-variant-numeric: tabular-nums;
+}
