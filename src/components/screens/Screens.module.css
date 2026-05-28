@@ -267,3 +267,74 @@
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
 }
+
+/* ══════════════════════════════════════════════
+   PauseScreen — spec-aligned classes
+   .eyebrow and .titleGroup reused from StartScreen.
+   ══════════════════════════════════════════════ */
+
+/* Panel — same visual as .screenPanel */
+.pausePanel {
+  composes: screenPanel;
+}
+
+/* Title — softFlicker instead of pulseGlow to feel "paused" */
+.pauseTitle {
+  font-size: 1.85rem;
+  letter-spacing: 0.24em;
+  color: var(--color-cyan);
+  text-shadow: var(--glow-cyan);
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin: 0;
+  animation: softFlicker 1.8s ease-in-out infinite;
+}
+
+/* Subtitle */
+.pauseSubtitle {
+  composes: screenSubtitle;
+}
+
+/* Status data box */
+.pauseStatusBox {
+  width: 100%;
+  border: 1px solid rgba(0, 234, 255, 0.2);
+  padding: 0.65rem 1rem;
+  background: rgba(0, 234, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Status row */
+.pauseStatusRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.07);
+}
+
+.pauseStatusRow:last-child {
+  border-bottom: none;
+}
+
+/* Label (span) and value (strong) via element selectors */
+.pauseStatusRow span {
+  color: var(--text-muted);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  opacity: 0.8;
+}
+
+.pauseStatusRow strong {
+  color: var(--color-cyan);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
