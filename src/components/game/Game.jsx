@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './Game.module.css'
 import hudStyles from '../hud/Hud.module.css'
+import { useKeyboardControls } from '../../hooks/useKeyboardControls'
 import Board from '../board/Board'
 import Score from '../hud/Score'
 import HudPanel from '../hud/HudPanel'
@@ -57,6 +58,15 @@ function Game() {
     resetGameState()
     setGameStatus(GAME_STATUS.START)
   }
+
+  useKeyboardControls({
+    gameStatus,
+    currentDirection: direction,
+    onDirectionChange: setNextDirection,
+    onStart: handleStartGame,
+    onPauseToggle: handlePauseGame,
+    onRestart: handleRestartGame,
+  })
 
   const statusColorClass = {
     [GAME_STATUS.START]:     styles.statusStart,
