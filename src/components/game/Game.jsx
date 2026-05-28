@@ -14,7 +14,6 @@ import {
   INITIAL_FOOD,
   BOARD_SIZE,
   INITIAL_SPEED,
-  MIN_SPEED,
   POINTS_PER_FOOD,
 } from '../../constants/gameConfig'
 import { DIRECTIONS } from '../../constants/directions'
@@ -28,12 +27,11 @@ import {
 import { generateFoodPosition } from '../../systems/foodSystem'
 
 function getDifficultyByScore(score) {
-  const nextLevel = Math.floor(score / 50) + 1
-  const nextSpeed = Math.max(MIN_SPEED, INITIAL_SPEED - (nextLevel - 1) * 20)
-  return {
-    level: nextLevel,
-    speed: nextSpeed,
-  }
+  if (score >= 200) return { level: 5, speed: 90 }
+  if (score >= 150) return { level: 4, speed: 110 }
+  if (score >= 100) return { level: 3, speed: 130 }
+  if (score >= 50)  return { level: 2, speed: 150 }
+  return { level: 1, speed: INITIAL_SPEED }
 }
 
 function Game() {
