@@ -24,7 +24,7 @@ function GameOverScreen({ score = 0, highScore = 0, onRestart, onMainMenu }) {
         </div>
 
         <div className={styles.buttonGroup}>
-          <NeonButton onClick={onRestart} variant="primary">RESTART</NeonButton>
+          <NeonButton onClick={onRestart} variant="danger">RESTART</NeonButton>
           <NeonButton onClick={onMainMenu} variant="secondary">MAIN MENU</NeonButton>
         </div>
       </div>

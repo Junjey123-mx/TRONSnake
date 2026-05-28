@@ -1,55 +1,116 @@
+/* ── Base button ─────────────────────────────── */
 .button {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.55rem;
+  padding: 0 1.85rem;
+  border: 1px solid;
   background: transparent;
-  border: 1px solid var(--color-cyan);
-  color: var(--color-cyan);
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: bold;
-  letter-spacing: 0.2em;
-  padding: 0.6rem 1.6rem;
-  cursor: pointer;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  cursor: pointer;
   outline: none;
+  transition:
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease,
+    transform 0.1s ease;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
 }
 
-.button:hover {
-  background: rgba(0, 234, 255, 0.1);
-  box-shadow: var(--glow-cyan);
+/* ── Glow sweep overlay ──────────────────────── */
+.buttonGlow {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
 }
 
+.button:hover .buttonGlow {
+  opacity: 1;
+}
+
+/* ── Text label on top ───────────────────────── */
+.buttonText {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Active press feedback ───────────────────── */
 .button:active {
-  background: rgba(0, 234, 255, 0.2);
+  transform: translateY(1px) scaleX(0.98);
 }
 
-/* Variants */
+/* ── Disabled ────────────────────────────────── */
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ── Primary — cyan / action principal ──────── */
 .primary {
   border-color: var(--color-cyan);
   color: var(--color-cyan);
+  text-shadow: 0 0 8px rgba(0, 234, 255, 0.65);
+  box-shadow: 0 0 6px rgba(0, 234, 255, 0.2);
+}
+
+.primary .buttonGlow {
+  background: rgba(0, 234, 255, 0.09);
 }
 
 .primary:hover {
-  background: rgba(0, 234, 255, 0.1);
-  box-shadow: var(--glow-cyan);
+  color: #e6faff;
+  box-shadow:
+    0 0 14px rgba(0, 234, 255, 0.85),
+    inset 0 0 14px rgba(0, 234, 255, 0.1);
+  text-shadow: 0 0 12px rgba(0, 234, 255, 0.9);
 }
 
+/* ── Secondary — blue / acción menos urgente ── */
 .secondary {
-  border-color: var(--color-blue);
+  border-color: rgba(0, 119, 255, 0.65);
   color: var(--color-blue);
+  text-shadow: 0 0 8px rgba(0, 119, 255, 0.45);
+  box-shadow: 0 0 5px rgba(0, 119, 255, 0.15);
+}
+
+.secondary .buttonGlow {
+  background: rgba(0, 119, 255, 0.07);
 }
 
 .secondary:hover {
-  background: rgba(0, 119, 255, 0.1);
-  box-shadow: var(--glow-blue);
+  color: #80b8ff;
+  box-shadow:
+    0 0 12px rgba(0, 119, 255, 0.7),
+    inset 0 0 12px rgba(0, 119, 255, 0.07);
+  text-shadow: 0 0 10px rgba(0, 119, 255, 0.8);
 }
 
+/* ── Danger — rojo / acción de riesgo ─────────── */
 .danger {
   border-color: var(--color-red);
   color: var(--color-red);
+  text-shadow: 0 0 8px rgba(255, 51, 85, 0.65);
+  box-shadow: 0 0 6px rgba(255, 51, 85, 0.2);
+}
+
+.danger .buttonGlow {
+  background: rgba(255, 51, 85, 0.08);
 }
 
 .danger:hover {
-  background: rgba(255, 51, 85, 0.1);
-  box-shadow: var(--glow-red);
+  color: #ffa0b0;
+  box-shadow:
+    0 0 14px rgba(255, 51, 85, 0.85),
+    inset 0 0 12px rgba(255, 51, 85, 0.09);
+  text-shadow: 0 0 12px rgba(255, 51, 85, 0.9);
 }
