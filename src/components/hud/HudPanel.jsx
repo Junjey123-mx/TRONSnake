@@ -1,15 +1,21 @@
 import styles from './Hud.module.css'
 
-function HudPanel({ title, children }) {
+function HudPanel({ title, children, className }) {
+  const rootClass = className
+    ? `${styles.hudPanel} ${className}`
+    : styles.hudPanel
+
   return (
-    <div className={styles.panel}>
-      <div className={styles.panelHeader}>
-        <span className={styles.panelTitle}>{title}</span>
-      </div>
+    <section className={rootClass}>
+      {title && (
+        <div className={styles.panelHeader}>
+          <span className={styles.panelTitle}>{title}</span>
+        </div>
+      )}
       <div className={styles.panelBody}>
         {children}
       </div>
-    </div>
+    </section>
   )
 }
 

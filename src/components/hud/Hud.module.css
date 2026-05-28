@@ -1,52 +1,144 @@
-/* ── HudPanel ─────────────────────────────────── */
-.panel {
-  border: 1px solid rgba(0, 234, 255, 0.3);
+/* ── Score panel ─────────────────────────────── */
+.scorePanel {
   background: var(--color-panel);
+  border: 1px solid rgba(0, 234, 255, 0.35);
+  box-shadow:
+    0 0 16px rgba(0, 234, 255, 0.08),
+    inset 0 0 24px rgba(0, 234, 255, 0.03);
+  padding: 1rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.scoreBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.scoreLabel {
+  color: var(--text-muted);
+  font-size: 0.52rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.scoreValue {
+  color: var(--color-cyan);
+  font-size: 1.65rem;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  text-shadow:
+    0 0 10px rgba(0, 234, 255, 0.9),
+    0 0 22px rgba(0, 234, 255, 0.45);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* ── HUD Panel ────────────────────────────────── */
+.hudPanel {
+  background: var(--color-panel);
+  border: 1px solid rgba(0, 234, 255, 0.22);
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.05);
 }
 
 .panelHeader {
-  padding: 0.35rem 0.75rem;
-  border-bottom: 1px solid rgba(0, 234, 255, 0.2);
-  background: rgba(0, 234, 255, 0.06);
+  padding: 0.32rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.18);
+  background: rgba(0, 234, 255, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* luminous dot indicator */
+.panelHeader::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  box-shadow: 0 0 6px rgba(0, 234, 255, 0.9);
+  flex-shrink: 0;
 }
 
 .panelTitle {
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
+  font-size: 0.52rem;
+  letter-spacing: 0.25em;
   color: var(--color-cyan);
   text-transform: uppercase;
   font-weight: bold;
 }
 
 .panelBody {
-  padding: 0.8rem 0.75rem;
+  padding: 0.6rem 0.75rem;
 }
 
-/* ── Score ────────────────────────────────────── */
-.scoreBlock {
+/* ── Data rows ────────────────────────────────── */
+.dataList {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
 }
 
-.scoreRow {
+.dataRow {
   display: flex;
-  flex-direction: column;
-  gap: 0.12rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.07);
 }
 
-.scoreLabel {
+.dataRow:last-child {
+  border-bottom: none;
+}
+
+.dataLabel {
+  font-size: 0.54rem;
+  letter-spacing: 0.1em;
   color: var(--text-muted);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.dataValue {
+  font-size: 0.76rem;
+  font-weight: bold;
+  color: var(--color-cyan);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Controls ─────────────────────────────────── */
+.controlsGrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.32rem 0;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.07);
+}
+
+.controlsGrid:last-child {
+  border-bottom: none;
+}
+
+.controlKey {
   font-size: 0.58rem;
+  font-weight: bold;
+  color: var(--color-cyan);
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(0, 234, 255, 0.45);
+  padding: 0.1rem 0.38rem;
+  background: rgba(0, 234, 255, 0.06);
+  box-shadow: 0 0 6px rgba(0, 234, 255, 0.18);
+}
+
+.controlAction {
+  font-size: 0.56rem;
+  color: var(--text-muted);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-}
-
-.scoreValue {
-  color: var(--color-cyan);
-  font-size: 1.15rem;
-  font-weight: bold;
-  letter-spacing: 0.06em;
-  text-shadow: var(--glow-cyan);
-  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
 }

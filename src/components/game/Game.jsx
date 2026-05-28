@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './Game.module.css'
+import hudStyles from '../hud/Hud.module.css'
 import Board from '../board/Board'
 import Score from '../hud/Score'
 import HudPanel from '../hud/HudPanel'
@@ -57,7 +58,6 @@ function Game() {
     setGameStatus(GAME_STATUS.START)
   }
 
-  /* Status color class applied on top of statusText base */
   const statusColorClass = {
     [GAME_STATUS.START]:     styles.statusStart,
     [GAME_STATUS.RUNNING]:   styles.statusRunning,
@@ -86,28 +86,30 @@ function Game() {
             <Score score={score} highScore={highScore} />
 
             <HudPanel title="CONTROLS">
-              <div className={styles.controlRow}>
-                <span className={styles.controlKey}>ARROWS / WASD</span>
-                <span className={styles.controlAction}>MOVE</span>
+              <div className={hudStyles.controlsGrid}>
+                <span className={hudStyles.controlKey}>ARROWS / WASD</span>
+                <span className={hudStyles.controlAction}>MOVE</span>
               </div>
-              <div className={styles.controlRow}>
-                <span className={styles.controlKey}>SPACE</span>
-                <span className={styles.controlAction}>PAUSE</span>
+              <div className={hudStyles.controlsGrid}>
+                <span className={hudStyles.controlKey}>SPACE</span>
+                <span className={hudStyles.controlAction}>PAUSE</span>
               </div>
-              <div className={styles.controlRow}>
-                <span className={styles.controlKey}>R</span>
-                <span className={styles.controlAction}>RESTART</span>
+              <div className={hudStyles.controlsGrid}>
+                <span className={hudStyles.controlKey}>R</span>
+                <span className={hudStyles.controlAction}>RESTART</span>
               </div>
             </HudPanel>
 
             <HudPanel title="PLAYER DATA">
-              <div className={styles.dataRow}>
-                <span className={styles.dataLabel}>CURRENT SCORE</span>
-                <span className={styles.dataValue}>{pad(score)}</span>
-              </div>
-              <div className={styles.dataRow}>
-                <span className={styles.dataLabel}>HIGH SCORE</span>
-                <span className={styles.dataValue}>{pad(highScore)}</span>
+              <div className={hudStyles.dataList}>
+                <div className={hudStyles.dataRow}>
+                  <span className={hudStyles.dataLabel}>CURRENT SCORE</span>
+                  <span className={hudStyles.dataValue}>{pad(score)}</span>
+                </div>
+                <div className={hudStyles.dataRow}>
+                  <span className={hudStyles.dataLabel}>HIGH SCORE</span>
+                  <span className={hudStyles.dataValue}>{pad(highScore)}</span>
+                </div>
               </div>
             </HudPanel>
           </aside>
@@ -141,34 +143,38 @@ function Game() {
           {/* Right panel */}
           <aside className={styles.rightPanel}>
             <HudPanel title="SYSTEM STATUS">
-              <div className={styles.dataRow}>
-                <span className={styles.dataLabel}>STATUS</span>
-                <span className={`${styles.statusText} ${statusColorClass}`}>
-                  {gameStatus}
-                </span>
-              </div>
-              <div className={styles.dataRow}>
-                <span className={styles.dataLabel}>GRID</span>
-                <span className={styles.dataValue}>ONLINE</span>
-              </div>
-              <div className={styles.dataRow}>
-                <span className={styles.dataLabel}>PLAYER</span>
-                <span className={styles.dataValue}>GUEST_001</span>
+              <div className={hudStyles.dataList}>
+                <div className={hudStyles.dataRow}>
+                  <span className={hudStyles.dataLabel}>STATUS</span>
+                  <span className={`${styles.statusText} ${statusColorClass}`}>
+                    {gameStatus}
+                  </span>
+                </div>
+                <div className={hudStyles.dataRow}>
+                  <span className={hudStyles.dataLabel}>GRID</span>
+                  <span className={hudStyles.dataValue}>ONLINE</span>
+                </div>
+                <div className={hudStyles.dataRow}>
+                  <span className={hudStyles.dataLabel}>PLAYER</span>
+                  <span className={hudStyles.dataValue}>GUEST_001</span>
+                </div>
               </div>
             </HudPanel>
 
             <HudPanel title="GRID DATA">
-              <div className={styles.dataRow}>
-                <span className={styles.dataLabel}>LEVEL</span>
-                <span className={styles.dataValue}>{pad(level, 2)}</span>
-              </div>
-              <div className={styles.dataRow}>
-                <span className={styles.dataLabel}>SPEED</span>
-                <span className={styles.dataValue}>{speed} MS</span>
-              </div>
-              <div className={styles.dataRow}>
-                <span className={styles.dataLabel}>BOARD</span>
-                <span className={styles.dataValue}>20 × 20</span>
+              <div className={hudStyles.dataList}>
+                <div className={hudStyles.dataRow}>
+                  <span className={hudStyles.dataLabel}>LEVEL</span>
+                  <span className={hudStyles.dataValue}>{pad(level, 2)}</span>
+                </div>
+                <div className={hudStyles.dataRow}>
+                  <span className={hudStyles.dataLabel}>SPEED</span>
+                  <span className={hudStyles.dataValue}>{speed} MS</span>
+                </div>
+                <div className={hudStyles.dataRow}>
+                  <span className={hudStyles.dataLabel}>BOARD</span>
+                  <span className={hudStyles.dataValue}>20 × 20</span>
+                </div>
               </div>
             </HudPanel>
           </aside>
