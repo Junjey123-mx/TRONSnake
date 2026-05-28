@@ -45,8 +45,10 @@
 }
 
 /* ── Food cell — magenta nucleus in center ───── */
+/* z-index: 3 keeps food visible above the Snake overlay layer (z-index: 2) */
 .foodCell {
   background: transparent;
+  z-index: 3;
 }
 
 /*
