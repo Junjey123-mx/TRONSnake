@@ -147,3 +147,123 @@
   font-family: 'Courier New', Courier, monospace;
   font-variant-numeric: tabular-nums;
 }
+
+/* ══════════════════════════════════════════════
+   StartScreen — spec-aligned classes
+   Existing .content / .mainTitle / .subtitle
+   remain for PauseScreen and GameOverScreen.
+   ══════════════════════════════════════════════ */
+
+/* Panel container */
+.screenPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  padding: 1.8rem 2.2rem;
+  border: 1px solid rgba(0, 234, 255, 0.5);
+  background: var(--color-panel);
+  box-shadow: var(--glow-cyan);
+  width: 360px;
+  max-width: calc(100% - 2rem);
+}
+
+/* Corner accents matching .content */
+.screenPanel::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid var(--color-cyan);
+  border-left: 2px solid var(--color-cyan);
+}
+
+.screenPanel::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 16px;
+  height: 16px;
+  border-bottom: 2px solid var(--color-cyan);
+  border-right: 2px solid var(--color-cyan);
+}
+
+/* Title group */
+.titleGroup {
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 0.5rem;
+  letter-spacing: 0.48em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0 0 0.3rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.screenTitle {
+  font-size: 1.85rem;
+  letter-spacing: 0.24em;
+  color: var(--color-cyan);
+  text-shadow: var(--glow-cyan);
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin: 0;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.screenSubtitle {
+  color: var(--text-muted);
+  letter-spacing: 0.24em;
+  font-size: 0.6rem;
+  margin: 0.3rem 0 0;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Instructions box */
+.instructions {
+  width: 100%;
+  border: 1px solid rgba(0, 234, 255, 0.2);
+  padding: 0.65rem 1rem;
+  background: rgba(0, 234, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.instructionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid rgba(0, 234, 255, 0.07);
+}
+
+.instructionRow:last-child {
+  border-bottom: none;
+}
+
+.instructionKey {
+  color: var(--color-cyan);
+  font-size: 0.66rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.instructionAction {
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}

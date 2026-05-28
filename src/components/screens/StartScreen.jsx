@@ -4,27 +4,34 @@ import NeonButton from '../ui/NeonButton'
 function StartScreen({ onStart }) {
   return (
     <div className={styles.overlay}>
-      <div className={styles.content}>
-        <div className={styles.titleBlock}>
-          <h1 className={styles.mainTitle}>TRON SNAKE</h1>
-          <p className={styles.subtitle}>ENTER THE GRID</p>
+      <section className={styles.screenPanel}>
+
+        <div className={styles.titleGroup}>
+          <p className={styles.eyebrow}>GRID ACCESS</p>
+          <h2 className={styles.screenTitle}>TRON SNAKE</h2>
+          <p className={styles.screenSubtitle}>ENTER THE GRID</p>
         </div>
 
-        <div className={styles.controls}>
-          <div className={styles.controlsGrid}>
-            <span className={styles.controlKey}>WASD / ARROWS</span>
-            <span className={styles.controlDesc}>Move</span>
-            <span className={styles.controlKey}>SPACE</span>
-            <span className={styles.controlDesc}>Pause</span>
-            <span className={styles.controlKey}>R</span>
-            <span className={styles.controlDesc}>Restart</span>
+        <div className={styles.instructions}>
+          <div className={styles.instructionRow}>
+            <span className={styles.instructionKey}>WASD / ARROWS</span>
+            <strong className={styles.instructionAction}>MOVE</strong>
+          </div>
+          <div className={styles.instructionRow}>
+            <span className={styles.instructionKey}>SPACE</span>
+            <strong className={styles.instructionAction}>PAUSE</strong>
+          </div>
+          <div className={styles.instructionRow}>
+            <span className={styles.instructionKey}>R</span>
+            <strong className={styles.instructionAction}>RESTART</strong>
           </div>
         </div>
 
         <NeonButton onClick={onStart} variant="primary">
           START GAME
         </NeonButton>
-      </div>
+
+      </section>
     </div>
   )
 }
