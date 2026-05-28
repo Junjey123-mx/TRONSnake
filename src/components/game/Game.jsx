@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import styles from './Game.module.css'
 import hudStyles from '../hud/Hud.module.css'
 import { useKeyboardControls } from '../../hooks/useKeyboardControls'
+import { useGameLoop } from '../../hooks/useGameLoop'
 import Board from '../board/Board'
 import Score from '../hud/Score'
 import HudPanel from '../hud/HudPanel'
@@ -13,22 +14,40 @@ import {
   INITIAL_FOOD,
   BOARD_SIZE,
   INITIAL_SPEED,
+  MIN_SPEED,
+  POINTS_PER_FOOD,
 } from '../../constants/gameConfig'
 import { DIRECTIONS } from '../../constants/directions'
 import { GAME_STATUS } from '../../constants/gameStatus'
+import { moveSnake } from '../../systems/movementSystem'
+import {
+  checkWallCollision,
+  checkSelfCollision,
+  checkFoodCollision,
+} from '../../systems/collisionSystem'
+import { generateFoodPosition } from '../../systems/foodSystem'
+
+function getDifficultyByScore(score) {
+  const nextLevel = Math.floor(score / 50) + 1
+  const nextSpeed = Math.max(MIN_SPEED, INITIAL_SPEED - (nextLevel - 1) * 20)
+  return {
+    level: nextLevel,
+    speed: nextSpeed,
+  }
+}
 
 function Game() {
-  const [snake, setSnake]               = useState(INITIAL_SNAKE)
-  const [food, setFood]                 = useState(INITIAL_FOOD)
-  const [direction, setDirection]       = useState(DIRECTIONS.RIGHT)
+  const [snake, setSnake]                 = useState(INITIAL_SNAKE)
+  const [food, setFood]                   = useState(INITIAL_FOOD)
+  const [direction, setDirection]         = useState(DIRECTIONS.RIGHT)
   const [nextDirection, setNextDirection] = useState(DIRECTIONS.RIGHT)
-  const [score, setScore]               = useState(0)
-  const [highScore, setHighScore]       = useState(0)
-  const [level, setLevel]               = useState(1)
-  const [speed, setSpeed]               = useState(INITIAL_SPEED)
-  const [gameStatus, setGameStatus]     = useState(GAME_STATUS.START)
+  const [score, setScore]                 = useState(0)
+  const [highScore, setHighScore]         = useState(0)
+  const [level, setLevel]                 = useState(1)
+  const [speed, setSpeed]                 = useState(INITIAL_SPEED)
+  const [gameStatus, setGameStatus]       = useState(GAME_STATUS.START)
 
-  /* Shared reset — avoids repeating the same setters */
+  /* Shared reset — does NOT touch highScore */
   const resetGameState = () => {
     setSnake(INITIAL_SNAKE)
     setFood(INITIAL_FOOD)
@@ -58,6 +77,64 @@ function Game() {
     resetGameState()
     setGameStatus(GAME_STATUS.START)
   }
+
+  const handleGameTick = useCallback(() => {
+    setSnake((currentSnake) => {
+      if (!currentSnake || currentSnake.length === 0) {
+        return INITIAL_SNAKE
+      }
+
+      const requestedDirection = nextDirection
+
+      setDirection(requestedDirection)
+
+      const newHead = {
+        x: currentSnake[0].x + requestedDirection.x,
+        y: currentSnake[0].y + requestedDirection.y,
+      }
+
+      const hitWall  = checkWallCollision(newHead, BOARD_SIZE)
+      const willEat  = food !== null && checkFoodCollision(newHead, food)
+
+      const bodyToCheck = willEat
+        ? currentSnake.slice(1)
+        : currentSnake.slice(1, -1)
+
+      const hitSelf = checkSelfCollision(newHead, bodyToCheck)
+
+      if (hitWall || hitSelf) {
+        setGameStatus(GAME_STATUS.GAME_OVER)
+        setHighScore((prev) => Math.max(prev, score))
+        return currentSnake
+      }
+
+      const updatedSnake = moveSnake(currentSnake, requestedDirection, willEat)
+
+      if (willEat) {
+        const nextScore = score + POINTS_PER_FOOD
+        setScore(nextScore)
+        setHighScore((prev) => Math.max(prev, nextScore))
+        const nextDifficulty = getDifficultyByScore(nextScore)
+        setLevel(nextDifficulty.level)
+        setSpeed(nextDifficulty.speed)
+        const nextFood = generateFoodPosition(BOARD_SIZE, updatedSnake)
+        if (nextFood === null) {
+          setFood(null)
+          setGameStatus(GAME_STATUS.GAME_OVER)
+        } else {
+          setFood(nextFood)
+        }
+      }
+
+      return updatedSnake
+    })
+  }, [food, nextDirection, score])
+
+  useGameLoop({
+    isRunning: gameStatus === GAME_STATUS.RUNNING,
+    speed,
+    onTick: handleGameTick,
+  })
 
   useKeyboardControls({
     gameStatus,
