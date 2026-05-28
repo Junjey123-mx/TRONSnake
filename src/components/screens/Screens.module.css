@@ -338,3 +338,70 @@
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
 }
+
+/* ══════════════════════════════════════════════
+   GameOverScreen — spec-aligned classes
+   .eyebrow, .titleGroup, .finalScores, .scoreRow,
+   .scoreLabel, .scoreValue, .buttonGroup reused.
+   ══════════════════════════════════════════════ */
+
+/* Panel — red border/glow for defeat state */
+.gameOverPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  padding: 1.8rem 2.2rem;
+  border: 1px solid rgba(255, 51, 85, 0.5);
+  background: var(--color-panel);
+  box-shadow: 0 0 20px rgba(255, 51, 85, 0.22);
+  width: 360px;
+  max-width: calc(100% - 2rem);
+}
+
+/* Corner accents in red */
+.gameOverPanel::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid var(--color-red);
+  border-left: 2px solid var(--color-red);
+}
+
+.gameOverPanel::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 16px;
+  height: 16px;
+  border-bottom: 2px solid var(--color-red);
+  border-right: 2px solid var(--color-red);
+}
+
+/* Title — red, dramatic, fast pulse */
+.gameOverTitle {
+  font-size: 1.85rem;
+  letter-spacing: 0.24em;
+  color: var(--color-red);
+  text-shadow: var(--glow-red);
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin: 0;
+  animation: pulseGlow 1.4s ease-in-out infinite;
+}
+
+/* Subtitle — red tint, secondary info */
+.gameOverSubtitle {
+  color: rgba(255, 51, 85, 0.62);
+  letter-spacing: 0.24em;
+  font-size: 0.6rem;
+  margin: 0.3rem 0 0;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+}
