@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import styles from './Game.module.css'
 import hudStyles from '../hud/Hud.module.css'
 import { useKeyboardControls } from '../../hooks/useKeyboardControls'
@@ -26,6 +26,8 @@ import {
 } from '../../systems/collisionSystem'
 import { generateFoodPosition } from '../../systems/foodSystem'
 
+const HIGH_SCORE_STORAGE_KEY = 'tronSnakeHighScore'
+
 function getDifficultyByScore(score) {
   if (score >= 200) return { level: 5, speed: 90 }
   if (score >= 150) return { level: 4, speed: 110 }
@@ -40,10 +42,20 @@ function Game() {
   const [direction, setDirection]         = useState(DIRECTIONS.RIGHT)
   const [nextDirection, setNextDirection] = useState(DIRECTIONS.RIGHT)
   const [score, setScore]                 = useState(0)
-  const [highScore, setHighScore]         = useState(0)
+  const [highScore, setHighScore]         = useState(() => {
+    if (typeof window === 'undefined') return 0
+    const stored = window.localStorage.getItem(HIGH_SCORE_STORAGE_KEY)
+    const parsed = Number(stored)
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : 0
+  })
   const [level, setLevel]                 = useState(1)
   const [speed, setSpeed]                 = useState(INITIAL_SPEED)
   const [gameStatus, setGameStatus]       = useState(GAME_STATUS.START)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    window.localStorage.setItem(HIGH_SCORE_STORAGE_KEY, String(highScore))
+  }, [highScore])
 
   /* Shared reset — does NOT touch highScore */
   const resetGameState = () => {
