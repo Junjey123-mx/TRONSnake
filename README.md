@@ -2,6 +2,8 @@
 
 Versión del juego clásico Snake desarrollada con React + Vite, con estética futurista inspirada en el universo visual tipo TRON: grids de neón, scanlines, paneles HUD y efectos de brillo cyan.
 
+**Demo en vivo:** [https://tron-snake-khaki.vercel.app/](https://tron-snake-khaki.vercel.app/)
+
 ---
 
 ## Tecnologías

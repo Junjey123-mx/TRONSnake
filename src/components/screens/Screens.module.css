@@ -148,12 +148,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ══════════════════════════════════════════════
-   StartScreen — spec-aligned classes
-   Existing .content / .mainTitle / .subtitle
-   remain for PauseScreen and GameOverScreen.
-   ══════════════════════════════════════════════ */
-
 /* Panel container */
 .screenPanel {
   position: relative;
@@ -268,11 +262,6 @@
   font-weight: bold;
 }
 
-/* ══════════════════════════════════════════════
-   PauseScreen — spec-aligned classes
-   .eyebrow and .titleGroup reused from StartScreen.
-   ══════════════════════════════════════════════ */
-
 /* Panel — same visual as .screenPanel */
 .pausePanel {
   composes: screenPanel;
@@ -338,12 +327,6 @@
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
 }
-
-/* ══════════════════════════════════════════════
-   GameOverScreen — spec-aligned classes
-   .eyebrow, .titleGroup, .finalScores, .scoreRow,
-   .scoreLabel, .scoreValue, .buttonGroup reused.
-   ══════════════════════════════════════════════ */
 
 /* Panel — red border/glow for defeat state */
 .gameOverPanel {
